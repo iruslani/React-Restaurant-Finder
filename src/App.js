@@ -3,6 +3,19 @@ import pizza from './pizza.svg';
 import './App.css';
 import 'whatwg-fetch';
 
+class RestaurantList extends Component {
+	render() {
+    return (
+      <ul className="list-group">
+        <li className="list-group-item">Cras justo odio</li>
+        <li className="list-group-item">Dapibus ac facilisis in</li>
+        <li className="list-group-item">Morbi leo risus</li>
+        <li className="list-group-item">Porta ac consectetur ac</li>
+        <li className="list-group-item">Vestibulum at eros</li>
+      </ul>
+    )
+  }
+}
 class App extends Component {
   render() {
     function checkStatus(response) {
@@ -55,6 +68,9 @@ class App extends Component {
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
             </div>
+          </div>
+          <div className="row">
+            <RestaurantList />
           </div>
         </div>
         <p className="App-intro">
