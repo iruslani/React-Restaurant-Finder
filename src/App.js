@@ -2,44 +2,47 @@ import React, { Component } from 'react';
 import pizza from './pizza.svg';
 import './App.css';
 import 'whatwg-fetch';
+import {checkStatus, parseJSON} from './utilities/index';
 
 class RestaurantList extends Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+      restaurants: [],
+    };
+  }
+	componentDidMount() {
+		var url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20zip%3D'94085'%20and%20query%3D'pizza'&format=json&diagnostics=true&callback="
+		fetch(url)
+			.then(checkStatus)
+			.then(parseJSON)
+			.then(function(data) {
+				console.log('request succeeded with JSON response', data.query.results.Result)
+				var results = data.query.results.Result
+				this.setState({restaurants :  results});
+			}.bind(this)).catch(function(error) {
+				console.log('request failed', error)
+			})
+	}
 	render() {
+		console.log(this.state)
+		var restaurants = this.state.restaurants || [];
     return (
       <ul className="list-group">
-        <li className="list-group-item">Cras justo odio</li>
+				{restaurants.map(function(restaurants){
+						return <li key={restaurants.id} className="list-group-item">Name: {restaurants.Title} - City: {restaurants.City}</li>
+				})}
+        {/*<li className="list-group-item">Cras justo odio</li>
         <li className="list-group-item">Dapibus ac facilisis in</li>
         <li className="list-group-item">Morbi leo risus</li>
         <li className="list-group-item">Porta ac consectetur ac</li>
-        <li className="list-group-item">Vestibulum at eros</li>
+        <li className="list-group-item">Vestibulum at eros</li>*/}
       </ul>
     )
   }
 }
 class App extends Component {
   render() {
-    function checkStatus(response) {
-      if (response.status >= 200 && response.status < 300) {
-        return response
-      } else {
-        var error = new Error(response.statusText)
-        error.response = response
-        throw error
-      }
-    }
-
-    function parseJSON(response) {
-      return response.json()
-    }
-    var url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20zip%3D'94085'%20and%20query%3D'pizza'&format=json&diagnostics=true&callback="
-    fetch(url)
-      .then(checkStatus)
-      .then(parseJSON)
-      .then(function(data) {
-        console.log('request succeeded with JSON response', data.query.results.Result)
-      }).catch(function(error) {
-        console.log('request failed', error)
-      })
     return (
       <div className="App">
         <nav className="navbar navbar-default">
