@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import pizza from './pizza.svg';
 import './App.css';
 import 'whatwg-fetch';
 import {checkStatus, parseJSON} from './utilities/index';
+import Header from './components/Header';
+import GeoLocation from './components/GeoLocation';
 
 class RestaurantList extends Component {
 	constructor(props) {
     super(props);
     this.state = {
       restaurants: [],
+			query: this.props.query
     };
   }
 	componentDidMount() {
@@ -26,54 +28,44 @@ class RestaurantList extends Component {
 	}
 	render() {
 		console.log(this.state)
+		console.log(this.props)
 		var restaurants = this.state.restaurants || [];
     return (
-      <ul className="list-group">
-				{restaurants.map(function(restaurants){
-						return <li key={restaurants.id} className="list-group-item">Name: {restaurants.Title} - City: {restaurants.City}</li>
-				})}
-      </ul>
+			<div className="col-sm-5 col-xs-12">
+	      <ul className="list-group">
+					{restaurants.map(function(restaurants){
+							return <li key={restaurants.id} className="list-group-item">Name: {restaurants.Title} - City: {restaurants.City}</li>
+					})}
+	      </ul>
+			</div>
     )
   }
 }
 class App extends Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+      query: 'pizza',
+    };
+		this.handleQuerysubmit = this.handleQuerysubmit.bind(this);
+  }
+	handleQuerysubmit(e) {
+		console.log('Clicked');
+		console.log(e);
+		// this.setState = ({
+		// 	query: 'hamburgers'
+		// });
+	}
   render() {
     return (
       <div className="App">
-        <nav className="navbar navbar-default">
-          <div className="container-fluid App-header">
-            <div className="row">
-              <img src={pizza} className="App-logo" alt="logo" />
-            </div>
-            <div className="row">
-              <h2>LetsEat.com</h2>
-            </div>
-          </div>
-        </nav>
+				<Header />
         <div className="container">
-          <div className="row">
-            <div className="col-sm-6">
-            <form>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Welcome and lets eat ... </label>
-                <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search Restaurants" />
-              </div>
-              <div className="checkbox">
-                <label>
-                  <input type="checkbox" /> Check me out
-                </label>
-              </div>
-              <button type="submit" className="btn btn-default">Submit</button>
-            </form>
-            </div>
-          </div>
-          <div className="row">
-            <RestaurantList />
+					<div className="row">
+            <GeoLocation />
+            <RestaurantList query={this.state.query}/>
           </div>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
