@@ -19,7 +19,6 @@ class RestaurantContainer extends Component {
   }
 	fetchRestaurants (query) {
 		let url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20WHERE%20latitude%3D%2237.6536537%22%20and%20longitude%3D%22-122.4656777%22%20and%20query%3D'"+query+"'%20and%20radius%3D%2250%22&format=json&diagnostics=true&callback="
-		// let url = "https://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20local.search%20WHERE%20latitude%3D%2237.6536537%22%20and%20longitude%3D%22-122.4656777%22%20and%20query%3D%22pizza%22%20and%20radius%3D%2220%22&format=json&diagnostics=true&callback="
 		fetch(url)
 			.then(checkStatus)
 			.then(parseJSON)
@@ -86,6 +85,11 @@ class RestaurantContainer extends Component {
     return (
 			<div className="row">
 				<div className="col-sm-4 col-xs-12">
+					<div className="panel panel-default">
+						<div className="panel-body">
+							<UserInput onQuerysubmit={this.updateQuery}/>
+						</div>
+					</div>
 					<GeoLocation />
 					<div className="panel panel-default">
 					  <div className="panel-heading">
@@ -98,11 +102,10 @@ class RestaurantContainer extends Component {
 						</ul>
 					  </div>
 					</div>
-					<UserInput onQuerysubmit={this.updateQuery}/>
 				</div>
 				<div className="col-sm-8 col-xs-12">
 					<h3>Suggested restaurants:</h3>
-					<RestaurantList sort={this.state.sort} restaurants={this.state.restaurants} query={this.state.query}/>
+					<RestaurantList restaurants={this.state.restaurants} />
 				</div>
 			</div>
     )
