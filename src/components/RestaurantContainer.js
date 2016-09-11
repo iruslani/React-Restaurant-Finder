@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RestaurantList from './RestaurantList';
 import {checkStatus, parseJSON} from '../utilities/index';
+import GeoLocation from './GeoLocation';
 import UserInput from './UserInput';
 
 class RestaurantContainer extends Component {
@@ -23,7 +24,6 @@ class RestaurantContainer extends Component {
 			.then(checkStatus)
 			.then(parseJSON)
 			.then(function(data) {
-				console.log('request succeeded with JSON response', data.query.results.Result)
 				let results = data.query.results.Result
 				if (this.state.sort === 'ratings') {
 					results = results.sort((a, b) => {
@@ -54,7 +54,8 @@ class RestaurantContainer extends Component {
 		this.setState({query :query});
 		this.fetchRestaurants(query);
 	}
-	toggleSortDistance() {
+	toggleSortDistance(e) {
+		e.preventDefault();
 		let results = this.state.restaurants
 		results = this.state.restaurants.sort((a, b) => {
 			if(!isFinite(a.Distance-b.Distance))
@@ -67,7 +68,8 @@ class RestaurantContainer extends Component {
 			restaurants :  results
 		});
 	}
-	toggleSortRatings() {
+	toggleSortRatings(e) {
+		e.preventDefault();
 		let results = this.state.restaurants
 		results = this.state.restaurants.sort((a, b) => {
 			if(!isFinite(a.Rating.AverageRating-b.Rating.AverageRating))
@@ -82,15 +84,26 @@ class RestaurantContainer extends Component {
 	}
 	render() {
     return (
-			<div>
-				<UserInput onQuerysubmit={this.updateQuery}/>
-				<h3>Suggested restaurants:</h3>
-				<p>Sort by:</p>
-				<ul className="nav nav-pills">
-					<li role="presentation" onClick={this.toggleSortRatings} className={this.state.sort === 'ratings' ? 'active' : ''}><a href="#">Ratings</a></li>
-				  <li role="presentation" onClick={this.toggleSortDistance} className={this.state.sort === 'distance' ? 'active' : ''}><a href="#">Distance</a></li>
-				</ul>
-				<RestaurantList sort={this.state.sort} restaurants={this.state.restaurants} query={this.state.query}/>
+			<div className="row">
+				<div className="col-sm-4 col-xs-12">
+					<GeoLocation />
+					<div className="panel panel-default">
+					  <div className="panel-heading">
+					    <h3 className="panel-title">Sort by:</h3>
+					  </div>
+					  <div className="panel-body">
+						<ul className="nav nav-pills">
+							<li role="presentation" onClick={this.toggleSortRatings} className={this.state.sort === 'ratings' ? 'active' : ''}><a href="#">Ratings</a></li>
+							<li role="presentation" onClick={this.toggleSortDistance} className={this.state.sort === 'distance' ? 'active' : ''}><a href="#">Distance</a></li>
+						</ul>
+					  </div>
+					</div>
+					<UserInput onQuerysubmit={this.updateQuery}/>
+				</div>
+				<div className="col-sm-8 col-xs-12">
+					<h3>Suggested restaurants:</h3>
+					<RestaurantList sort={this.state.sort} restaurants={this.state.restaurants} query={this.state.query}/>
+				</div>
 			</div>
     )
   }

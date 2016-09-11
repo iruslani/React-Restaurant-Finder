@@ -51,11 +51,15 @@ class GeoLocation extends Component {
   }
   render() {
     return (
-      <div className="col-sm-7 col-xs-12">
-        <h3>{this.state.message}</h3>
-        <p>{this.state.latitude ? 'Latitude: ' + this.state.latitude : '' }</p>
-        <p>{this.state.longitude ? 'Longitude: ' + this.state.longitude : ''}</p>
-        <p>{this.state.zipcode ? 'Zipcode: ' + this.state.zipcode : ''}</p>
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3 className="panel-title">{this.state.message}</h3>
+        </div>
+        <div className="panel-body">
+          <p>{this.state.latitude ? 'Latitude: ' + this.state.latitude : '' }</p>
+          <p>{this.state.longitude ? 'Longitude: ' + this.state.longitude : ''}</p>
+          <p>{this.state.zipcode ? 'Zipcode: ' + this.state.zipcode : ''}</p>
+        </div>
       </div>
     )
   }

@@ -20,7 +20,6 @@ class UserInput extends Component {
     return (
     <div className="row">
       <div className="col-sm-12">
-      <h3>Enter new location:</h3>
         <form onSubmit={this.handleQuerysubmit}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Search for food: </label>
