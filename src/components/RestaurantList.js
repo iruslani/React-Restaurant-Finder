@@ -15,8 +15,6 @@ class RestaurantList extends Component {
 		var restaurants = this.props.restaurants || [];
 		return (
 			<div>
-				<p>Sort by: {this.props.sort}</p>
-				<p>Keyword: {this.props.query}</p>
 				<ul className="list-group">
 					{restaurants.map(function(restaurant){
 							return <li key={restaurant.id} className="list-group-item">

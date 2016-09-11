@@ -3,25 +3,38 @@ import React, { Component } from 'react';
 class UserInput extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      query : 'pizza'
+    }
 		this.handleQuerysubmit = this.handleQuerysubmit.bind(this);
+		this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 	handleQuerysubmit(e) {
-		console.log('Clicked');
-		console.log(e);
-		// this.setState = ({
-		// 	query: 'hamburgers'
-		// });
+    e.preventDefault();
+    this.props.onQuerysubmit(this.state.query);
 	}
+  handleQueryChange(e) {
+    this.setState({query: e.target.value});
+  }
   render() {
     return (
     <div className="row">
       <div className="col-sm-12">
       <h3>Enter new location:</h3>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Welcome to lets eat ... </label>
-          <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search Restaurants" />
-        </div>
-        <button type="submit" onClick={this.handleQuerysubmit} className="btn btn-default">Submit</button>
+        <form onSubmit={this.handleQuerysubmit}>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Search for food: </label>
+            <input
+              type="text"
+              value={this.state.query}
+              onChange={this.handleQueryChange}
+              className="form-control"
+              id="query"
+              name="query"
+              placeholder="Search Restaurants" />
+          </div>
+          <button type="submit" className="btn btn-default">Submit</button>
+        </form>
       </div>
     </div>
     )
