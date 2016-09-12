@@ -20,7 +20,14 @@
   font-size: large;
 }
 .active.btn.btn-link {
-  text-decoration: underline;
+  background-color: #ffe78b;
+  border-radius: 5px;
+}
+.btn-group {
+  margin: 0px 10px;
+}
+.sort {
+  margin: 20px;
 }
 
 @keyframes App-logo-spin {

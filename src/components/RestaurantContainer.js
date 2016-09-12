@@ -103,7 +103,7 @@ class RestaurantContainer extends Component {
 				</div>
 				<div className="col-sm-8 col-xs-12">
 					<h3>Suggested restaurants:</h3>
-					<div className="row">
+					<div className="row sort">
 						<div className="col-xs-12">
 						Sort by:
 						<div className="btn-group " role="group" aria-label="...">

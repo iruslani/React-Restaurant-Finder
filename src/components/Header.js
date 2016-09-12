@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import pizza from '../pizza.svg';
+import pizza from '../assets/pizza.svg';
 
 class Header extends Component {
   render() {
