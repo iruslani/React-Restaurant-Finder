@@ -60,7 +60,7 @@ class RestaurantContainer extends Component {
 	updateZip(zip){
 		this.setState({zip :zip});
 		this.fetchRestaurants(this.state.query, zip);
-		console.log("Zip code changes to:" + zip);
+		// console.log("Zip code changes to:" + zip);
 	}
 	toggleSortDistance(e) {
 		e.preventDefault();
@@ -100,20 +100,18 @@ class RestaurantContainer extends Component {
 						</div>
 					</div>
 					<GeoLocation onZipchange={this.updateZip} />
-					<div className="panel panel-default">
-					  <div className="panel-heading">
-					    Sort by:
-					  </div>
-					  <div className="panel-body">
-						<ul className="nav nav-pills">
-							<li role="presentation" onClick={this.toggleSortRatings} className={this.state.sort === 'ratings' ? 'active' : ''}><a href="#">Ratings</a></li>
-							<li role="presentation" onClick={this.toggleSortDistance} className={this.state.sort === 'distance' ? 'active' : ''}><a href="#">Distance</a></li>
-						</ul>
-					  </div>
-					</div>
 				</div>
 				<div className="col-sm-8 col-xs-12">
 					<h3>Suggested restaurants:</h3>
+					<div className="row">
+						<div className="col-xs-12">
+						Sort by:
+						<div className="btn-group " role="group" aria-label="...">
+							<button onClick={this.toggleSortRatings} className={this.state.sort === 'ratings' ? 'active btn btn-link' : 'btn btn-link'} type="button" >Ratings</button>
+							<button onClick={this.toggleSortDistance} className={this.state.sort === 'distance' ? 'active btn btn-link' : 'btn btn-link'} type="button" >Distance</button>
+						</div>
+						</div>
+     			</div>
 					<RestaurantList restaurants={this.state.restaurants} />
 				</div>
 			</div>

@@ -31,8 +31,8 @@ class GeoLocation extends Component {
 			.then(checkStatus)
 			.then(parseJSON)
 			.then(function(data) {
-				console.log('ZipCode request succeeded with JSON response')
-				console.log(data.results)
+				// console.log('ZipCode request succeeded with JSON response')
+				// console.log(data.results)
         var zipcode = data.results[0].address_components[7].short_name ? data.results[0].address_components[7].short_name : '94015'
         this.setState({zipcode :  zipcode});
         this.props.onZipchange(this.state.zipcode);

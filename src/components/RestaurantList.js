@@ -15,7 +15,7 @@ class RestaurantList extends Component {
 									<h4 className="list-group-item-heading">{restaurant.Title}</h4>
 								</a>
 								<p className="list-group-item-text">
-								{restaurant.Address}, {restaurant.City} {restaurant.State}
+								{restaurant.Address} {restaurant.City} {restaurant.State}
 								</p>
 									Distance: {restaurant.Distance} <br/>
 									Ratings: {restaurant.Rating.AverageRating !== 'NaN' ? restaurant.Rating.AverageRating : '0'}
