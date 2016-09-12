@@ -10,15 +10,19 @@ class RestaurantContainer extends Component {
     this.state = {
 			restaurants : [],
 			sort: 'ratings',
-			query: this.props.query
+			query: this.props.query,
+			zipcode: 94080
     };
 		this.toggleSortRatings = this.toggleSortRatings.bind(this);
 		this.toggleSortDistance = this.toggleSortDistance.bind(this);
 		this.updateQuery = this.updateQuery.bind(this);
+		this.updateZip = this.updateZip.bind(this);
 		this.fetchRestaurants = this.fetchRestaurants.bind(this);
   }
-	fetchRestaurants (query) {
-		let url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20WHERE%20latitude%3D%2237.6536537%22%20and%20longitude%3D%22-122.4656777%22%20and%20query%3D'"+query+"'%20and%20radius%3D%2250%22&format=json&diagnostics=true&callback="
+	fetchRestaurants (query, zipcode) {
+		// let url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20WHERE%20latitude%3D%2237.6536537%22%20and%20longitude%3D%22-122.4656777%22%20and%20query%3D'"+query+"'%20and%20radius%3D%2250%22&format=json&diagnostics=true&callback="
+		// let url = "https://query.yahooapis.com/v1/yql?q=select%20*%20from%20local.search%20where%20zip%3D'94015'%20and%20query%3D'"+query+"'&format=json&diagnostics=true&callback="
+		let url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20zip%3D'"+zipcode+"'%20and%20query%3D'"+query+"'&format=json&diagnostics=true&callback="
 		fetch(url)
 			.then(checkStatus)
 			.then(parseJSON)
@@ -47,11 +51,16 @@ class RestaurantContainer extends Component {
 			})
 	}
 	componentDidMount() {
-		this.fetchRestaurants('pizza');
+		this.fetchRestaurants(this.state.query, this.state.zipcode );
 	}
 	updateQuery(query){
 		this.setState({query :query});
-		this.fetchRestaurants(query);
+		this.fetchRestaurants(query, this.state.zipcode);
+	}
+	updateZip(zip){
+		this.setState({zip :zip});
+		this.fetchRestaurants(this.state.query, zip);
+		console.log("Zip code changes to:" + zip);
 	}
 	toggleSortDistance(e) {
 		e.preventDefault();
@@ -90,10 +99,10 @@ class RestaurantContainer extends Component {
 							<UserInput onQuerysubmit={this.updateQuery}/>
 						</div>
 					</div>
-					<GeoLocation />
+					<GeoLocation onZipchange={this.updateZip} />
 					<div className="panel panel-default">
 					  <div className="panel-heading">
-					    <h3 className="panel-title">Sort by:</h3>
+					    Sort by:
 					  </div>
 					  <div className="panel-body">
 						<ul className="nav nav-pills">

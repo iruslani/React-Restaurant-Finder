@@ -12,6 +12,9 @@ class GeoLocation extends Component {
       message : "Fetching your location .."
     };
     this.updatePosition = this.updatePosition.bind(this);
+    this.getLocation = this.getLocation.bind(this);
+    this.handleZipChange = this.handleZipChange.bind(this);
+    this.handleQuerysubmit = this.handleQuerysubmit.bind(this);
   }
   getLocation() {
       if (navigator.geolocation) {
@@ -30,10 +33,12 @@ class GeoLocation extends Component {
 			.then(function(data) {
 				console.log('ZipCode request succeeded with JSON response')
 				console.log(data.results)
-        var zipcode = data.results[0].address_components[7].short_name
+        var zipcode = data.results[0].address_components[7].short_name ? data.results[0].address_components[7].short_name : '94015'
         this.setState({zipcode :  zipcode});
+        this.props.onZipchange(this.state.zipcode);
 			}.bind(this)).catch(function(error) {
-				console.log('request failed', error)
+				console.log('request failed')
+				console.log(error)
 			})
   }
   updatePosition(position) {
@@ -46,6 +51,13 @@ class GeoLocation extends Component {
       longitude : position.coords.longitude
     });
   }
+  handleQuerysubmit(e) {
+    e.preventDefault();
+    this.props.onZipchange(this.state.zipcode);
+	}
+  handleZipChange(e) {
+    this.setState({zipcode: e.target.value});
+  }
   componentDidMount() {
     this.getLocation();
   }
@@ -53,12 +65,28 @@ class GeoLocation extends Component {
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">{this.state.message}</h3>
+          {this.state.message}
         </div>
         <div className="panel-body">
           <p>{this.state.latitude ? 'Latitude: ' + this.state.latitude : '' }</p>
           <p>{this.state.longitude ? 'Longitude: ' + this.state.longitude : ''}</p>
           <p>{this.state.zipcode ? 'Zipcode: ' + this.state.zipcode : ''}</p>
+          <form onSubmit={this.handleQuerysubmit}>
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Change Zipcode: </label>
+              <input
+                type="text"
+                value={this.state.zipcode}
+                onChange={this.handleZipChange}
+                className="form-control"
+                id="query"
+                name="query"
+                placeholder="Change Zipcode" />
+            </div>
+            <button type="submit" className="btn btn-default" >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     )
