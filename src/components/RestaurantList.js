@@ -11,10 +11,14 @@ class RestaurantList extends Component {
 					{restaurants.map(function(restaurant){
 						return (
 							<li key={restaurant.id} className="list-group-item">
-								{restaurant.Title} <br/>
-								City: {restaurant.City} <br/>
-								Distance: {restaurant.Distance} <br/>
-								Ratings: {restaurant.Rating.AverageRating !== 'NaN' ? restaurant.Rating.AverageRating : '0'}
+								<a href={restaurant.Url} >
+									<h4 className="list-group-item-heading">{restaurant.Title}</h4>
+								</a>
+								<p className="list-group-item-text">
+								{restaurant.Address}, {restaurant.City} {restaurant.State}
+								</p>
+									Distance: {restaurant.Distance} <br/>
+									Ratings: {restaurant.Rating.AverageRating !== 'NaN' ? restaurant.Rating.AverageRating : '0'}
 							</li>
 						)
 
