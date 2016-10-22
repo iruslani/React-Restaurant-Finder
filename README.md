@@ -7,18 +7,18 @@ This app uses the Yahoo YQL API for restaurant data and Google Maps API to find 
 
 ## Install the app:
 
-### `npm install`
+`npm install`
 
 ## Run the app locally:
 
-### `npm start`
+`npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Run build for production:
 
-### `npm build`
+`npm build`
 
 This will create a build folder ready for production.
 
