@@ -28,6 +28,10 @@ To test production build locally just go to the build folder and run :
 
 Then point browser to : http://localhost:8000/
 
+## App testing :
+
+`npm test`
+
 ## Developer Information:
 
 ### Author : Iwan Ruslani
