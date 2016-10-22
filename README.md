@@ -26,6 +26,8 @@ To test production build locally just go to the build folder and run :
 
 `python -m SimpleHTTPServer 8000`
 
+Then point browser to : http://localhost:8000/
+
 ## Developer Information:
 
 ### Author : Iwan Ruslani
