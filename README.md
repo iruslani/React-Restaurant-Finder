@@ -9,7 +9,7 @@ This app uses the Yahoo YQL API for restaurant data and Google Maps API to find 
 
 `npm install`
 
-## Run the app locally:
+## Run the app locally (on Development server):
 
 `npm start`
 
@@ -21,6 +21,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 `npm build`
 
 This will create a build folder ready for production.
+cd to /build directory. 
 
 To test production build locally just go to the build folder and run :
 
