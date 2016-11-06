@@ -9,9 +9,14 @@ This app uses the Yahoo YQL API for restaurant data and Google Maps API to find 
 
 `npm install`
 
+## Run the app locally with Heroku (on Development server):
+### (You may need to run npm build)
+`heroku local web`
+
 ## Run the app locally (on Development server):
 
 `npm start`
+
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
