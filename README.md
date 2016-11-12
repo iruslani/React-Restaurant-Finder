@@ -16,11 +16,11 @@ This app uses the Yahoo YQL API for restaurant data and Google Maps API to find 
 `heroku local web`
 
 ## Run the app locally (on Development server):
-`npm start`
+`npm run start`
 Then point browser to : http://localhost:8080/
 
 ## Run build for production:
-`npm build`
+`npm run build`
 
 ## App testing (not yet working):
 `npm test`

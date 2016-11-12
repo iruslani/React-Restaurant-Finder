@@ -4,7 +4,7 @@
   "author": "Iwan Ruslani",
   "license": "MIT",
   "scripts": {
-    "build-prod": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+    "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "node app.js"
   },
   "dependencies": {
