@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// var Icon = require('babel!svg-react!../svg/my-icon.svg?name=Icon');
+// import pizza from '../assets/pizza.svg';
 import pizza from '../assets/pizza.svg';
 
 class Header extends Component {
