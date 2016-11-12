@@ -5,6 +5,9 @@ This demo app helps you find local restaurants. It uses your browser GeoLocation
 You can search cuisine and sort the restaurant list results by distance and ratings ( default sort order ).
 This app uses the Yahoo YQL API for restaurant data and Google Maps API to find your zip code according to Lat and Long obtained from Geo Location.
 
+* [Demo Here](https://letseatapp.herokuapp.com)
+
+
 ## Install the app:
 `npm install`
 
