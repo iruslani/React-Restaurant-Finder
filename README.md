@@ -33,3 +33,13 @@ This app currently uses the following:
 - React for the UI
 - whatwg-fetch for API requests.
 - Twitter bootstrap for a little bit of CSS styling.
+
+
+Example Foursquare request:
+https://api.foursquare.com/v2/venues/explore/?near=daly city&venuePhotos=1&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20131124&query=sushi
+
+image:
+
+https://irs1.4sqi.net/img/general/300x500/51685216_gAf9hcl55MbEQfLglel0kgSh0MZmN6yw756s3pdZtvQ.jpg
+
+prefix + 300x500 + suffix
