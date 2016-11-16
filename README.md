@@ -48,3 +48,5 @@ image:
 https://irs1.4sqi.net/img/general/300x500/51685216_gAf9hcl55MbEQfLglel0kgSh0MZmN6yw756s3pdZtvQ.jpg
 
 prefix + 300x500 + suffix
+
+https://irs2.4sqi.net/img/general/300x500/153924980_GhqskPty2IJw_buW6qys--VGdgVLGc20bBApvuqFdrM.jpg
