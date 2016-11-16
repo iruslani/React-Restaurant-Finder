@@ -35,8 +35,13 @@ This app currently uses the following:
 - Twitter bootstrap for a little bit of CSS styling.
 
 
-Example Foursquare request:
+### Example Foursquare request:
+
+With Near params:
 https://api.foursquare.com/v2/venues/explore/?near=daly city&venuePhotos=1&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20131124&query=sushi
+
+With ll params:
+https://api.foursquare.com/v2/venues/explore/?venuePhotos=1&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20131124&query=sushi&ll=37.6536938,-122.46565609999999
 
 image:
 
