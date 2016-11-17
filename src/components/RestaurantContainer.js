@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RestaurantList from './RestaurantList';
+import FoursquareList from './FoursquareList';
 import {checkStatus, parseJSON} from '../utilities/index';
 import GeoLocation from './GeoLocation';
 import UserInput from './UserInput';
@@ -9,6 +10,7 @@ class RestaurantContainer extends Component {
     super(props);
     this.state = {
 			restaurants : [],
+			foursquare : [],
 			sort: 'ratings',
 			query: this.props.query,
 			zipcode: 94080
@@ -18,7 +20,25 @@ class RestaurantContainer extends Component {
 		this.updateQuery = this.updateQuery.bind(this);
 		this.updateZip = this.updateZip.bind(this);
 		this.fetchRestaurants = this.fetchRestaurants.bind(this);
+		this.fetchFourSquare = this.fetchFourSquare.bind(this);
   }
+	fetchFourSquare (){
+		// let url = 'https://api.foursquare.com/v2/venues/search?ll=40.7,-74&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20161112'
+		let url = 'https://api.foursquare.com/v2/venues/explore/?&ll=37.6536938,-122.46565609999999&venuePhotos=1&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20131124&query=sushi'
+		fetch(url)
+			.then(checkStatus)
+			.then(parseJSON)
+			.then(function(data) {
+				let results = data.response.groups[0].items
+				this.setState({
+					foursquare : results
+				});
+			}.bind(this)).catch(function(error) {
+				console.log('request failed', error)
+			})
+	}
+
+
 	fetchRestaurants (query, zipcode) {
 		// let url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20WHERE%20latitude%3D%2237.6536537%22%20and%20longitude%3D%22-122.4656777%22%20and%20query%3D'"+query+"'%20and%20radius%3D%2250%22&format=json&diagnostics=true&callback="
 		// let url = "https://query.yahooapis.com/v1/yql?q=select%20*%20from%20local.search%20where%20zip%3D'94015'%20and%20query%3D'"+query+"'&format=json&diagnostics=true&callback="
@@ -52,6 +72,7 @@ class RestaurantContainer extends Component {
 	}
 	componentDidMount() {
 		this.fetchRestaurants(this.state.query, this.state.zipcode );
+		this.fetchFourSquare();
 	}
 	updateQuery(query){
 		this.setState({query :query});
@@ -91,6 +112,8 @@ class RestaurantContainer extends Component {
 		});
 	}
 	render() {
+		console.log('foursquare data')
+		console.log(this.state.foursquare)
     return (
 			<div className="row">
 				<div className="col-sm-4 col-xs-12">
@@ -113,6 +136,7 @@ class RestaurantContainer extends Component {
 						</div>
      			</div>
 					<RestaurantList restaurants={this.state.restaurants} />
+					<FoursquareList venues={this.state.foursquare} />
 				</div>
 			</div>
     )
