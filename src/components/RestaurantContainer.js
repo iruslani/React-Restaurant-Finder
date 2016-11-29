@@ -19,12 +19,12 @@ class RestaurantContainer extends Component {
 		this.toggleSortDistance = this.toggleSortDistance.bind(this);
 		this.updateQuery = this.updateQuery.bind(this);
 		this.updateZip = this.updateZip.bind(this);
-		this.fetchRestaurants = this.fetchRestaurants.bind(this);
+		// this.fetchRestaurants = this.fetchRestaurants.bind(this);
 		this.fetchFourSquare = this.fetchFourSquare.bind(this);
   }
-	fetchFourSquare (){
+	fetchFourSquare (query){
 		// let url = 'https://api.foursquare.com/v2/venues/search?ll=40.7,-74&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20161112'
-		let url = 'https://api.foursquare.com/v2/venues/explore/?&ll=37.6536938,-122.46565609999999&venuePhotos=1&client_id=E3YQN5PP3UJR4CYKYFWBOPCFTYIJVEEYWBPGBEK5DOZ5UZJQ&client_secret=TBCUJQ5Q5Q2XBMDQ40K4LLZFIKSUFLRUCYP4M1PFTXMS5JM4&v=20131124&query=sushi'
+		let url = 'http://localhost:8080/api/foursquare/?test=hello&ll=37.6536938,-122.46565609999999&query='+query
 		fetch(url)
 			.then(checkStatus)
 			.then(parseJSON)
@@ -72,11 +72,12 @@ class RestaurantContainer extends Component {
 	}
 	componentDidMount() {
 		this.fetchRestaurants(this.state.query, this.state.zipcode );
-		this.fetchFourSquare();
+		this.fetchFourSquare(this.state.query);
 	}
 	updateQuery(query){
 		this.setState({query :query});
 		this.fetchRestaurants(query, this.state.zipcode);
+		this.fetchFourSquare(query);
 	}
 	updateZip(zip){
 		this.setState({zip :zip});
@@ -135,7 +136,7 @@ class RestaurantContainer extends Component {
 						</div>
 						</div>
      			</div>
-					<RestaurantList restaurants={this.state.restaurants} />
+					{/*<RestaurantList restaurants={this.state.restaurants} />*/}
 					<FoursquareList venues={this.state.foursquare} />
 				</div>
 			</div>
